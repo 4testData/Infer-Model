@@ -311,7 +311,6 @@ def main(filepath = '/content/Infer-Model/Ultrasound_test_video.mp4', model_fold
     model = create_model(num_classes= 4, depth = 4, model_name = '_Bayes3DUNetKG_', type = 'tflite')
     model = load_model(input_image_shape = (256,256,1), n_input_frames = 8, n_classes = 4, depth = 4, model_name = '_Bayes3DUNetKG_', model_epoch = '2_best_bn_t', filepath = model_folder, type = 'tflite')
     print(model)
-    print("model loading done!!")
     video_file = filepath
     #print(video_file)
     images, count, total_count, image_numpy = [], 0, 0, np.zeros((8, 256, 256, 1))
@@ -326,6 +325,7 @@ def main(filepath = '/content/Infer-Model/Ultrasound_test_video.mp4', model_fold
             if count == 8:
 		print("Count value is 8!!")
                 epi_mean, epi_var = perform_inference(image_numpy, model, '_Bayes3DUNetKG_', 1, type='tflite')
+		print("perform_inference function didn't return values!!")
                 # model.save('models')
                 # exit()
                 model_output = tf.nn.softmax(epi_mean).numpy()
