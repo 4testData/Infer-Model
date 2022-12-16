@@ -311,7 +311,7 @@ def main(filepath = '/content/Infer-Model/Ultrasound_test_video.mp4', model_fold
     model = load_model(input_image_shape = (256,256,1), n_input_frames = 8, n_classes = 4, depth = 4, model_name = '_Bayes3DUNetKG_', model_epoch = '2_best_bn_t', filepath = model_folder, type = 'tflite')
     print("model path is:", model)
     video_file = filepath
-    #print(video_file)
+    print(video_file)
     images, count, total_count, image_numpy = [], 0, 0, np.zeros((8, 256, 256, 1))
     frames, needle_maps, nerve_maps, vessel_maps, needle_tips = [], [], [], [], []
     # parse out images from video
@@ -323,7 +323,6 @@ def main(filepath = '/content/Infer-Model/Ultrasound_test_video.mp4', model_fold
         if not SLIDING_WINDOW:
             if count == 8:
                 epi_mean, epi_var = perform_inference(image_numpy, model, '_Bayes3DUNetKG_', 1, type='tflite')
-		#print("Perform inference called successfully!!")
 		# model.save('models')
                 # exit()
                 model_output = tf.nn.softmax(epi_mean).numpy()
@@ -371,7 +370,7 @@ def main(filepath = '/content/Infer-Model/Ultrasound_test_video.mp4', model_fold
                         needle_maps.append(needle_frame)
                         nerve_maps.append(nerve_frame)
                         vessel_maps.append(vessel_frame)
-                    
+                    print("Perform inference called successfully!!")
                     frames.append(image_numpy[i,:,:,:])
                     needle_tips.append(needle_tip)
 
@@ -383,10 +382,8 @@ def main(filepath = '/content/Infer-Model/Ultrasound_test_video.mp4', model_fold
         success, image = vid_file.read()
         count += 1      
         total_count += 1
-        print("Main function executed!!")
         #print(frames, needle_maps, nerve_maps, vessel_maps, needle_tips)
 
-    print("Termination!!")
     return frames, needle_maps, nerve_maps, vessel_maps, needle_tips
     
 if __name__ == '__main__':
