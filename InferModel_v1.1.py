@@ -275,7 +275,7 @@ def load_model(input_image_shape, n_input_frames, n_classes, depth, model_name, 
 def perform_inference(input_list = None, model = None, model_name = None, n_mc_samples = None, is_training=True, type='tflite'):
     if type == 'normal':
         """Can set to is_training to false if batch statistics have converged properly, otherwise true is better"""
-        #print("Predicting Output")
+        print("Predicting Output")
         epi_mean, epi_var = None, None
         if model_name == '_Bayes3DUNetKG_':
             sequence_input = np.expand_dims(np.stack(input_list, axis=0), axis=0)
