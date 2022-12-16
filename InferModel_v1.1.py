@@ -307,10 +307,10 @@ def perform_inference(input_list = None, model = None, model_name = None, n_mc_s
     return epi_mean, epi_var
 
 #filepath = '../3. 238 AC_Video 2.mp4'
-def main(filepath = 'Ultrasound_test_video.mp4', model_folder = './model/'):
+def main(filepath = '/content/Infer-Model/Ultrasound_test_video.mp4', model_folder = '/content/Infer-Model/model/'):
     model = create_model(num_classes= 4, depth = 4, model_name = '_Bayes3DUNetKG_', type = 'tflite')
     model = load_model(input_image_shape = (256,256,1), n_input_frames = 8, n_classes = 4, depth = 4, model_name = '_Bayes3DUNetKG_', model_epoch = '2_best_bn_t', filepath = model_folder, type = 'tflite')
-    #print(model)
+    print(model)
     print("model loading done!!")
     video_file = filepath
     #print(video_file)
@@ -324,6 +324,7 @@ def main(filepath = 'Ultrasound_test_video.mp4', model_folder = './model/'):
     while success:
         if not SLIDING_WINDOW:
             if count == 8:
+		print("Count value is 8!!")
                 epi_mean, epi_var = perform_inference(image_numpy, model, '_Bayes3DUNetKG_', 1, type='tflite')
                 # model.save('models')
                 # exit()
@@ -384,10 +385,9 @@ def main(filepath = 'Ultrasound_test_video.mp4', model_folder = './model/'):
         success, image = vid_file.read()
         count += 1      
         total_count += 1
-        print("Main function executed!!")
+        
         #print(frames, needle_maps, nerve_maps, vessel_maps, needle_tips)
 
-    print("Termination!!")
     return frames, needle_maps, nerve_maps, vessel_maps, needle_tips
     
 if __name__ == '__main__':
@@ -395,12 +395,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Run inference')
     parser.add_argument('--run', type=str, default='positive')
     #parser.add_argument('--filepath', type=str, default='../3. 238 AC_Video 2.mp4')
-    parser.add_argument('--filepath', type=str, default='Ultrasound_test_video.mp4')
+    parser.add_argument('--filepath', type=str, default='/content/Infer-Model/Ultrasound_test_video.mp4')
     args = parser.parse_args()
 
     start = time.time()
     #frames, needle_maps, nerve_maps, vessel_maps, needle_tips =  main(filepath = args.filepath)
-    frames, needle_maps, nerve_maps, vessel_maps, needle_tips =  main(filepath = args.filepath, model_folder = './model/')
+    frames, needle_maps, nerve_maps, vessel_maps, needle_tips =  main(filepath = args.filepath, model_folder = '/content/Infer-Model/model/')
     print("Video Processing Done!!")
     maps_time = time.time()
 
