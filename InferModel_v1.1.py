@@ -323,7 +323,7 @@ def main(filepath = '/content/Infer-Model/Ultrasound_test_video.mp4', model_fold
         if not SLIDING_WINDOW:
             if count == 8:
                 epi_mean, epi_var = perform_inference(image_numpy, model, '_Bayes3DUNetKG_', 1, type='tflite')
-		print("Perform inference called successfully!!")
+		#print("Perform inference called successfully!!")
 		# model.save('models')
                 # exit()
                 model_output = tf.nn.softmax(epi_mean).numpy()
