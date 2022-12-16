@@ -324,7 +324,7 @@ def main(filepath = '/content/Infer-Model/Ultrasound_test_video.mp4', model_fold
         if not SLIDING_WINDOW:
             if count == 8:
 		print("Count value is 8!!")
-                epi_mean, epi_var = perform_inference(image_numpy, model, '_Bayes3DUNetKG_', 1, type='tflite')
+		epi_mean, epi_var = perform_inference(image_numpy, model, '_Bayes3DUNetKG_', 1, type='tflite')
 		print("perform_inference function didn't return values!!")
                 # model.save('models')
                 # exit()
