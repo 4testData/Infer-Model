@@ -244,7 +244,6 @@ def postprocess_img(img, minLineLength = 0, maxLineGap = 100):
 
 def load_model(input_image_shape, n_input_frames, n_classes, depth, model_name, model_epoch, filepath, dropout=0.50, batch_norm=True, type = 'normal'):
     print("Loading Model")
-    print("Model type", type)
     # model_path = os.path.join(os.path.dirname(os.path.abspath(filepath)), "model_weights")
     if type == 'normal':
         model_path = filepath
@@ -257,9 +256,7 @@ def load_model(input_image_shape, n_input_frames, n_classes, depth, model_name, 
         model.load_weights(get_h5_file(os.path.join(model_path, model_epoch)), by_name=False) # must manually set names
     
     elif type == 'tflite':
-	#path = '/content/Infer-Model/model/model.tflite'
-	model = tf.lite.Interpreter(path)
-	#print("TFLite model Loaded successfully!!")
+        model = tf.lite.Interpreter('model.tflite')
         model.allocate_tensors()
         # Get input and output tensors.
         # input_details = model.get_input_details()
@@ -311,10 +308,8 @@ def perform_inference(input_list = None, model = None, model_name = None, n_mc_s
 
 def main(filepath = '../3. 238 AC_Video 2.mp4', model_folder = 'bayes_3d_kg_pnb_e_5_l_bayesian_combined_kg_f_8_model_bayes_3d_unet_kg_4-26-2022-14-36'):
     model = create_model(num_classes= 4, depth = 4, model_name = '_Bayes3DUNetKG_', type = 'tflite')
-    print("Model Path is:", model)
     model = load_model(input_image_shape = (256,256,1), n_input_frames = 8, n_classes = 4, depth = 4, model_name = '_Bayes3DUNetKG_', model_epoch = '2_best_bn_t', filepath = model_folder, type = 'tflite')
-    video_file= filepath
-    print("Video file path:",video_file)
+    video_file = filepath
     images, count, total_count, image_numpy = [], 0, 0, np.zeros((8, 256, 256, 1))
     frames, needle_maps, nerve_maps, vessel_maps, needle_tips = [], [], [], [], []
     # parse out images from video
