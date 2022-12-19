@@ -88,6 +88,9 @@ def preprocess_img(img):
         img_out = img
     #img_out = cv2.resize(img_out, dsize=(256, 256), interpolation = cv2.INTER_NEAREST)
     img_out = cv2.resize(img_out[41:255, 104:350], dsize=(256, 256), interpolation = cv2.INTER_NEAREST)
+    plt.plot(img_out)
+    plt.show()
+    print(img_out.shape())
     # img_out = cv2.resize(img_out[55:1025,114:798], dsize=(256, 256), interpolation = cv2.INTER_NEAREST)
     return img_out[:,:, np.newaxis].astype(np.float32)
 
