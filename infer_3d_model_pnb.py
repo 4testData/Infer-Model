@@ -256,7 +256,7 @@ def load_model(input_image_shape, n_input_frames, n_classes, depth, model_name, 
         model.load_weights(get_h5_file(os.path.join(model_path, model_epoch)), by_name=False) # must manually set names
     
     elif type == 'tflite':
-        model = tf.lite.Interpreter('model.tflite')
+        model = tf.lite.Interpreter('/content/Infer-Model/model.tflite')
         model.allocate_tensors()
         # Get input and output tensors.
         # input_details = model.get_input_details()
@@ -310,6 +310,7 @@ def main(filepath = '../3. 238 AC_Video 2.mp4', model_folder = 'bayes_3d_kg_pnb_
     model = create_model(num_classes= 4, depth = 4, model_name = '_Bayes3DUNetKG_', type = 'tflite')
     model = load_model(input_image_shape = (256,256,1), n_input_frames = 8, n_classes = 4, depth = 4, model_name = '_Bayes3DUNetKG_', model_epoch = '2_best_bn_t', filepath = model_folder, type = 'tflite')
     video_file = filepath
+    print("Video File Path is:", video_file)
     images, count, total_count, image_numpy = [], 0, 0, np.zeros((8, 256, 256, 1))
     frames, needle_maps, nerve_maps, vessel_maps, needle_tips = [], [], [], [], []
     # parse out images from video
