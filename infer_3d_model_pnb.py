@@ -308,8 +308,7 @@ def perform_inference(input_list = None, model = None, model_name = None, n_mc_s
 
 def main(filepath = '../3. 238 AC_Video 2.mp4', model_folder = 'bayes_3d_kg_pnb_e_5_l_bayesian_combined_kg_f_8_model_bayes_3d_unet_kg_4-26-2022-14-36'):
     model = create_model(num_classes= 4, depth = 4, model_name = '_Bayes3DUNetKG_', type = 'tflite')
-    print("Model Path is:",     model = create_model(num_classes= 4, depth = 4, model_name = '_Bayes3DUNetKG_', type = 'tflite')
- )
+    print("Model Path is:", model)
     model = load_model(input_image_shape = (256,256,1), n_input_frames = 8, n_classes = 4, depth = 4, model_name = '_Bayes3DUNetKG_', model_epoch = '2_best_bn_t', filepath = model_folder, type = 'tflite')
     video_file= filepath
     print("Video file path:",video_file)
