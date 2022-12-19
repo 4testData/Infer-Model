@@ -244,6 +244,7 @@ def postprocess_img(img, minLineLength = 0, maxLineGap = 100):
 
 def load_model(input_image_shape, n_input_frames, n_classes, depth, model_name, model_epoch, filepath, dropout=0.50, batch_norm=True, type = 'normal'):
     print("Loading Model")
+    print("Model type", type)
     # model_path = os.path.join(os.path.dirname(os.path.abspath(filepath)), "model_weights")
     if type == 'normal':
         model_path = filepath
