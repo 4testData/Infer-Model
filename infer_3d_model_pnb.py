@@ -257,9 +257,10 @@ def load_model(input_image_shape, n_input_frames, n_classes, depth, model_name, 
         model.load_weights(get_h5_file(os.path.join(model_path, model_epoch)), by_name=False) # must manually set names
     
     elif type == 'tflite':
-        model = tf.lite.Interpreter('/content/Infer-Model/model/model.tflite')
-        model.allocate_tensors()
-	print("Done")
+		path = '/content/Infer-Model/model/model.tflite'
+		model = tf.lite.Interpreter(path)
+		print("TFLite model Loaded successfully!!")
+        	model.allocate_tensors()
         # Get input and output tensors.
         # input_details = model.get_input_details()
         # output_details = model.get_output_details()
