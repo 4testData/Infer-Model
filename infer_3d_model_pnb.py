@@ -258,8 +258,8 @@ def load_model(input_image_shape, n_input_frames, n_classes, depth, model_name, 
     
     elif type == 'tflite':
         model = tf.lite.Interpreter('/content/Infer-Model/model/model.tflite')
-	print("Model Invoked Successfull!!")
         model.allocate_tensors()
+	print("Done")
         # Get input and output tensors.
         # input_details = model.get_input_details()
         # output_details = model.get_output_details()
